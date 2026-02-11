@@ -1,0 +1,94 @@
+{
+  "entities": {
+    "fixedBooking": {
+      "title": "Fixed Booking",
+      "type": "object",
+      "properties": {
+        "val": {
+          "type": "string",
+          "description": "Class name"
+        }
+      },
+      "required": ["val"],
+      "description": "Represents a fixed, recurring booking for a room."
+    },
+    "extraReservation": {
+      "title": "Extra Reservation",
+      "type": "object",
+      "properties": {
+        "room": {
+          "type": "string",
+          "description": "The name of the room."
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "description": "The date of the reservation in YYYY-MM-DD format."
+        },
+        "period": {
+          "type": "string",
+          "description": "The period of the reservation (e.g., '1', '2', 'lunch')."
+        },
+        "className": {
+          "type": "string",
+          "description": "The name of the class making the reservation."
+        }
+      },
+      "required": ["room", "date", "period", "className"],
+      "description": "Represents a one-time, extra reservation for a room."
+    },
+    "classSubject": {
+      "title": "Class Subject",
+      "type": "object",
+      "properties": {
+        "val": {
+          "type": "string",
+          "description": "Subject name"
+        }
+      },
+      "required": ["val"],
+      "description": "Represents the subject for a specific class at a given time."
+    },
+    "teacherSchedule": {
+      "title": "Teacher Schedule",
+      "type": "object",
+      "properties": {
+        "val": {
+          "type": "string",
+          "description": "Class name"
+        }
+      },
+      "required": ["val"],
+      "description": "Represents a teacher's scheduled class at a given time."
+    }
+  },
+  "auth": {
+    "providers": ["anonymous"]
+  },
+  "firestore": {
+    "artifacts/{appId}/public/data/fixedData/{fixedDataId}": {
+      "schema": {
+        "$ref": "#/entities/fixedBooking"
+      },
+      "description": "Stores the fixed timetable data for each room, day, and period."
+    },
+    "artifacts/{appId}/public/data/extraRes/{extraResId}": {
+      "schema": {
+        "$ref": "#/entities/extraReservation"
+      },
+      "description": "Stores extra, one-off reservations."
+    },
+    "artifacts/{appId}/public/data/classSubjects/{classSubjectId}": {
+      "schema": {
+        "$ref": "#/entities/classSubject"
+      },
+      "description": "Stores the subject for each class at a specific time."
+    },
+    "artifacts/{appId}/public/data/teacherSchedules/{teacherScheduleId}": {
+      "schema": {
+        "$ref": "#/entities/teacherSchedule"
+      },
+      "description": "Stores the schedule for each teacher."
+    }
+  }
+}
